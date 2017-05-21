@@ -47,28 +47,31 @@
     }
 
     var dayDate = now.toString().split(" ");
-    dateFormatted = `- ${ampmHours}:${minutes} ${ampm} on ${dayDate[1]} ${dayDate[2]}`;
+    dateFormatted = `${ampmHours}:${minutes} ${ampm} on ${dayDate[1]} ${dayDate[2]}`;
 
   }
 
   function gotData(data) {
+    notes.innerHTML = "";
     var noteList = data.val();
     var keys = Object.keys(noteList);
 
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
-      var notes = noteList[k].message;
+      var note = noteList[k].message;
       var time = noteList[k].time;
 
       var li = document.createElement('li');
-      li.innerHTML = `${notes} ${time}`;
+      var span = document.createElement('span');
+      li.setAttribute("class", "note-item");
+      span.setAttribute("class", "time-item");
 
-      console.log(notes);
+      span.innerHTML = time;
+      li.innerHTML = note;
 
-      // console.log(notes, time);
+      notes.append(li);
+      notes.append(span);
     }
-
-
 
   }
 
@@ -90,10 +93,10 @@
       console.error("Empty note not pushed to database");
     }
 
-    ref.on('value', gotData, errData);
+    ref.limitToLast(20).on('value', gotData, errData);
+    message.value = "";
   });
 
-
-
+  ref.limitToLast(20).on('value', gotData, errData);
 
 })();

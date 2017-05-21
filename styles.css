@@ -4,6 +4,35 @@
   padding: 0px;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 .container {
-  text-align: center;
+  position: relative;
+  height: 100%;
+  text-align: right;
+}
+
+.time-item {
+  font-size: .9rem;
+}
+
+.note-item {
+  background-color: aliceblue;
+  border-radius: 3px;;
+}
+
+#new-note {
+  position: absolute;
+  width: 100%;
+  padding: 5px;
+  bottom: 0px;
+  right: 0px;
+  background: white;
+  border-top: 1px solid lightgray;
 }
