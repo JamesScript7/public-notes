@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   // Initialize Firebase
   var config = {
@@ -13,14 +15,60 @@
   var database = firebase.database();
   var ref = database.ref('notes');
 
+  // DOM stuff
+  var newNote = document.getElementById("new-note");
+  var message = document.getElementById("message");
+  var button = document.getElementById("submit");
+  var notes = document.getElementById("notes");
+
   var data = {
     time: "now",
     message: "whatever, blah blah blah"
   }
 
-  var notes = document.getElementById("notes");
-  var message = document.getElementById("message");
-  var button = document.getElementById("submit");
+  var dayDate;
+  var dateFormatted;
+
+  function time() {
+    var now = new Date();
+    var hours24 = now.getHours();
+
+    var minutes = now.getMinutes();
+    if (minutes < 10) {
+    	minutes = "0" + minutes;
+    }
+
+    var ampmHours;
+    if (hours24 == 0) {
+    	ampmHours = 12; //midnight
+    } else if (hours24 > 12) {
+    	ampmHours = hours24 - 12;
+    } else {
+    	ampmHours = hours24;
+    }
+
+    var ampm;
+    if (hours24 >= 12) {
+    	ampm = "PM";
+    } else {
+    	ampm = "AM";
+    }
+
+    dayDate = now.toString().split(" ");
+
+    dateFormatted = `${ampmHours}:${minutes} ${ampm} at ${dayDate[1]} ${dayDate[2]}`;
+
+  }
+
+  button.addEventListener('click', function() {
+    time();
+
+    console.log(dateFormatted);
+
+    console.log(message.value);
+  });
+
+
 
   // ref.push(data);
 
