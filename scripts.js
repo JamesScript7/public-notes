@@ -19,6 +19,7 @@
   var message = document.getElementById("message");
   var button = document.getElementById("submit");
   var notes = document.getElementById("notes");
+  var allNotes = document.getElementById("all-notes");
   var dateFormatted;
 
   function time() {
@@ -71,6 +72,8 @@
 
       notes.append(li);
       notes.append(span);
+      
+      notes.scrollTop = notes.scrollHeight;
     }
 
   }
@@ -95,8 +98,11 @@
 
     ref.limitToLast(20).on('value', gotData, errData);
     message.value = "";
+    message.focus();
   });
 
   ref.limitToLast(20).on('value', gotData, errData);
+
+
 
 })();

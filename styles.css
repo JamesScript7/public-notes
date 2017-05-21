@@ -15,6 +15,7 @@ body {
 .container {
   position: relative;
   height: 100%;
+  width: 100%;
   text-align: right;
 }
 
@@ -23,16 +24,48 @@ body {
 }
 
 .note-item {
-  background-color: aliceblue;
+  background-color: ghostwhite;
   border-radius: 3px;;
+}
+
+.title {
+  position: fixed;
+  background-color: lightgoldenrodyellow;
+  right: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px;
+  margin: 0px;
+}
+
+#notes {
+  position: absolute;
+  bottom: 50px;
+  list-style-type: none;
+  right: 15px;
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 #new-note {
   position: absolute;
   width: 100%;
-  padding: 5px;
-  bottom: 0px;
-  right: 0px;
+  padding: 3px;
+  bottom: 15px;
+  right: 15px;
   background: white;
   border-top: 1px solid lightgray;
+}
+
+#message {
+  width: 200px;
+  resize: none;
+  overflow: hidden;
+  height: 1.7em;
+  padding: 2px;
+}
+
+#submit {
+  margin: 5px 0px 0px 5px;
 }
