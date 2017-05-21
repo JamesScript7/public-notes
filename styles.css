@@ -24,7 +24,7 @@ body {
 }
 
 .note-item {
-  background-color: ghostwhite;
+  background-color: whitesmoke;
   border-radius: 3px;;
 }
 
@@ -45,6 +45,7 @@ body {
   list-style-type: none;
   right: 15px;
   max-height: 300px;
+  max-width: 250px;
   overflow-y: scroll;
 }
 
@@ -52,7 +53,7 @@ body {
   position: absolute;
   width: 100%;
   padding: 3px;
-  bottom: 15px;
+  bottom: 5px;
   right: 15px;
   background: white;
   border-top: 1px solid lightgray;
