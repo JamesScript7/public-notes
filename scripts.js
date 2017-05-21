@@ -11,7 +11,6 @@
     messagingSenderId: "477427081213"
   };
   firebase.initializeApp(config);
-
   var database = firebase.database();
   var ref = database.ref('notes');
 
@@ -20,13 +19,6 @@
   var message = document.getElementById("message");
   var button = document.getElementById("submit");
   var notes = document.getElementById("notes");
-
-  var data = {
-    time: "now",
-    message: "whatever, blah blah blah"
-  }
-
-  var dayDate;
   var dateFormatted;
 
   function time() {
@@ -54,23 +46,54 @@
     	ampm = "AM";
     }
 
-    dayDate = now.toString().split(" ");
+    var dayDate = now.toString().split(" ");
+    dateFormatted = `- ${ampmHours}:${minutes} ${ampm} on ${dayDate[1]} ${dayDate[2]}`;
 
-    dateFormatted = `${ampmHours}:${minutes} ${ampm} at ${dayDate[1]} ${dayDate[2]}`;
+  }
 
+  function gotData(data) {
+    var noteList = data.val();
+    var keys = Object.keys(noteList);
+
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var notes = noteList[k].message;
+      var time = noteList[k].time;
+
+      var li = document.createElement('li');
+      li.innerHTML = `${notes} ${time}`;
+
+      console.log(notes);
+
+      // console.log(notes, time);
+    }
+
+
+
+  }
+
+  function errData(err) {
+    console.error(err)
   }
 
   button.addEventListener('click', function() {
     time();
 
-    console.log(dateFormatted);
+    var data = {
+      'time': dateFormatted,
+      'message': message.value
+    };
 
-    console.log(message.value);
+    if (message.value !== "") {
+      ref.push(data);
+    } else {
+      console.error("Empty note not pushed to database");
+    }
+
+    ref.on('value', gotData, errData);
   });
 
 
-
-  // ref.push(data);
 
 
 })();
